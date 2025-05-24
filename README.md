@@ -8,7 +8,7 @@ The LEMP Stack is a popular web development platform made up of four components:
 
 1. **Launch an EC2 Instance**: Start by launching a t2.micro EC2 instance (or any compute engine) running Ubuntu 24.04 LTS or later. Choose a region close to your target audience. (This guide assumes you’re using AWS, but you can adapt these steps for other cloud providers.)
 
-   ![Launch the Instance](./images/create_ec2_instance_with_open_http_and_ssh_ports.png)
+   ![Launch the Instance](./images/1.Create_ec2.png)
 
 2. **Create an SSH Key Pair**: Name it `Mywebtest` (or any name you prefer) to access your instance via SSH on port 22.
 
@@ -17,11 +17,11 @@ The LEMP Stack is a popular web development platform made up of four components:
    - Allow HTTPS traffic (port 443) from anywhere.
    - Allow SSH traffic (port 22) from anywhere (this is usually enabled by default).
 
-   ![Security Rules on Instance](./images/security_groups.png)
+   ![Security Rules on Instance](./images/3.Security_groups.png)
 
 4. **Use Default VPC and Subnet**: Keep the default VPC and subnet configurations.
 
-   ![Default VPC and Network Configurations](./images/default_network_configs_used.png)
+   ![Default VPC and Network Configurations](./images/4.defaut_vpc.png)
 
 5. **Download the Private SSH Key**: If you're using Linux or macOS, change the permissions before use:
    ```bash
@@ -33,7 +33,7 @@ The LEMP Stack is a popular web development platform made up of four components:
    ```
    (Replace `<instance-ip>` with your instance's public IP, e.g., `3.139.72.61`.)
 
-   ![SSH into the EC2 Instance](./images/ssh_into_the_instance.png)
+   ![SSH into the EC2 Instance](./images/5.ssh_login.png)
 
 ## Step 1: Install Nginx
 
@@ -42,13 +42,13 @@ The LEMP Stack is a popular web development platform made up of four components:
    sudo apt update
    sudo apt upgrade -y
    ```
-   ![Update Package Manager](./images/sudo_apt_update.png)
+   ![Update Package Manager](./images/6.Sudo_apt_update.png)
 
 2. **Install Nginx**:
    ```bash
    sudo apt install nginx -y
    ```
-   ![Install Nginx](./images/sudo_apt_install_nginx.png)
+   ![Install Nginx](./images/7.Install-nginx.png)
 
 3. **Check Nginx Status**:
    ```bash
@@ -56,7 +56,7 @@ The LEMP Stack is a popular web development platform made up of four components:
    ```
    Look for the green "active (running)" status.
 
-   ![Check Nginx Status](./images/systemctl_status_nginx.png)
+   ![Check Nginx Status](./images/8.nginx_running.png)
 
 4. **Test Nginx**:
    ```bash
@@ -67,7 +67,7 @@ The LEMP Stack is a popular web development platform made up of four components:
    ```
    http://3.139.72.61
    ```
-   ![Nginx Browser Test Result](./images/nginx_browser_test.png)
+   ![Nginx Browser Test Result](./images/9.nginx_browser_test.png)
 
 6. **Get Your Public IP**: You can also retrieve your instance's public IP with:
    ```bash
@@ -80,20 +80,20 @@ The LEMP Stack is a popular web development platform made up of four components:
    ```bash
    sudo apt install mysql-server
    ```
-   ![Install MySQL](./images/apt_install_mysql-server.png)
+   ![Install MySQL](./images/10.install_mysql.png)
 
 2. **Log into MySQL**:
    ```bash
    sudo mysql
    ```
-   ![Login to MySQL Console](./images/sudo_mysql.png)
+   ![Login to MySQL Console](./images/11.Sudo_mysql.png)
 
 3. **Set Root Password**:
    ```sql
    ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'RootPass.3';
    ```
 
-   ![Set Root Password](./images/alter_mysql_root_user_password.png)
+   ![Set Root Password](./images/12.Alter_Password.png)
 
    Log out:
    ```sql
@@ -105,7 +105,7 @@ The LEMP Stack is a popular web development platform made up of four components:
    sudo mysql_secure_installation
    ```
 
-   ![Run MySQL Secure Installation](./images/run_mysql_interactive_script.png)
+   ![Run MySQL Secure Installation](./images/13.mysql_secure_install.png)
 
 5. **Test MySQL Login**:
    ```bash
@@ -122,7 +122,7 @@ The LEMP Stack is a popular web development platform made up of four components:
    ```bash
    sudo apt install php-fpm php-mysql -y
    ```
-   ![Install PHP](./images/install_php.png)
+   ![Install PHP](./images/14.install_php.png)
 
 ## Step 4: Configure Nginx for PHP
 
@@ -135,7 +135,7 @@ The LEMP Stack is a popular web development platform made up of four components:
    ```bash
    sudo chown -R $USER:$USER /var/www/projectLEMP
    ```
-   ![Change Ownership](./images/make_nginx_directory_and_change_owner.png)
+   ![Change Ownership](./images/15.mkdir & chown.png)
 
 3. **Create Nginx Config File**:
    ```bash
@@ -161,20 +161,20 @@ The LEMP Stack is a popular web development platform made up of four components:
    }
    ```
 
-   ![Nginx Configuration](./images/configure_nginx_to_serve_projectLAMP.png)
+   ![Nginx Configuration](./images/16.config nginx_to_serve.png)
 
 4. **Activate the Configuration**:
    ```
    sudo ln -s /etc/nginx/sites-available/projectLEMP /etc/nginx/sites-enabled/
    ```
 
-   ![Link Nginx Config](./images/linking_the_nginx_configurations_to_sites_enabled_directory.png)
+   ![Link Nginx Config](./images/17.linking nginx_to_sites_enabled.png)
 
 5. **Test Nginx Configuration**:
    ```bash
    sudo nginx -t
    ```
-   ![Test Nginx Config](./images/testing_nginx_config.png)
+   ![Test Nginx Config](./images/18.test_nginx_config.png)
 
 6. **Disable Default Config**:
    ```bash
@@ -188,7 +188,7 @@ The LEMP Stack is a popular web development platform made up of four components:
 
    Now, access your site via your public IP in a browser to see the result!
 
-   ![Site Look](./images/Lemp_Test1.png)
+   ![Site Look](./images/19.browser-test.png)
 
 ## Step 5: Test PHP Requests
 
@@ -205,6 +205,7 @@ The LEMP Stack is a popular web development platform made up of four components:
    ```
    http://3.139.72.61/info.php
    ```
+![Site Look](./images/20.Php-browser_test.png)
 
    After verifying, remove the file:
    ```bash
@@ -259,7 +260,7 @@ The LEMP Stack is a popular web development platform made up of four components:
    ```sql
    SELECT * FROM todo_list;
    ```
-![Query the mysql table to view its content](./images/view_table.png)
+![Query the mysql table to view its content](./images/21.view_table.png)
 
 
 
@@ -298,7 +299,7 @@ The LEMP Stack is a popular web development platform made up of four components:
    ```
    http://3.139.72.61/todo_list.php
    ```
-![Php script fetching records from the MySQL Database and displaying on the webpage](./images/test_todo_list_php.png)
+![Php script fetching records from the MySQL Database and displaying on the webpage](./images/22.todolist.php.png)
 
 ## Conclusion
 Congratulations! You've successfully set up a LEMP stack on AWS. This LEMP stack (just like the LAMP stack) provides a solid platform for hosting and serving web apps. If you as a developer want to deploy scalable solutions that can be relied upon, then you would need to seriously consider one of these stacks as they have been tested, tried and proven to meet expectations.
